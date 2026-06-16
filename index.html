@@ -25,14 +25,11 @@
         .title { font-size: 17px; font-weight: 600; flex: 1; text-align: center; }
         .right-button { width: 50px; }
 
-        /* Main View & Fallback Gradient */
-        .main-view { position: relative; min-height: calc(100vh - 50px); background-color: #f5f5f5; overflow-x: hidden; }
+        /* Main View - Latar Belakang Gradasi Hijau Default Agar PNG Terlihat */
+        .main-view { position: relative; min-height: calc(100vh - 50px); background: #f5f5f5 linear-gradient(180deg, #00903B 0%, #006B2D 160px, #f5f5f5 280px) no-repeat; overflow-x: hidden; }
         
         /* Gambar banner otomatis */
         .main-logo { width: 100%; position: absolute; top: 0; left: 0; z-index: 0; }
-        
-        /* Gradasi Hijau Pengganti jika gambar tidak ada */
-        .fallback-green-gradient { background: #f5f5f5 linear-gradient(180deg, #00903B 0%, #006B2D 160px, #f5f5f5 280px) no-repeat !important; }
 
         .card-wrap { position: relative; z-index: 2; padding: 147px 15px 20px 15px; }
 
@@ -134,7 +131,7 @@
         </div>
 
         <div class="main-view" id="mainView">
-            <img src="./eighthHeader.cc09398a.png" class="main-logo" id="headerImage" onerror="this.style.display='none'; document.getElementById('mainView').classList.add('fallback-green-gradient');">
+            <img src="./eighthHeader.cc09398a.png" class="main-logo" id="headerImage" onerror="this.style.display='none';">
             
             <div class="card-wrap">
                 <div class="new-register-card main-card">
