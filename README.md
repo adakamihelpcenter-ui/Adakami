@@ -1,0 +1,2 @@
+# Adakami
+cek limit
