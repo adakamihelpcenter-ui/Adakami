@@ -299,10 +299,12 @@
                     <div id="c2" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
                     <div id="c3" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
                     <div id="c4" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
+                    <div id="c5" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
+                    <div id="c6" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
                 </div>
                 
-                <!-- Input tersembunyi buat ngetik -->
-                <input type="text" id="otpInput" maxlength="4" style="position: absolute; opacity: 0; pointer-events: none;" autocomplete="off">
+                <!-- Input tersembunyi buat ngetik diubah maxlength ke 6 -->
+                <input type="text" id="otpInput" maxlength="6" style="position: absolute; opacity: 0; pointer-events: none;" autocomplete="off">
 
                 <div class="timer-resend">
                     <span id="countSpan">60s</span>
@@ -344,7 +346,16 @@
         const displayNum = document.getElementById('displayNum');
         
         const otpInput = document.getElementById('otpInput');
-        const codeItems = [document.getElementById('c1'), document.getElementById('c2'), document.getElementById('c3'), document.getElementById('c4')];
+        
+        // Update: Memasukkan elemen id c5 dan c6 ke dalam array
+        const codeItems = [
+            document.getElementById('c1'), 
+            document.getElementById('c2'), 
+            document.getElementById('c3'), 
+            document.getElementById('c4'),
+            document.getElementById('c5'),
+            document.getElementById('c6')
+        ];
         const submitOtpBtn = document.getElementById('submitOtpBtn');
         
         const countSpan = document.getElementById('countSpan');
@@ -422,7 +433,9 @@
         otpInput.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[^0-9]/g, '');
             const val = e.target.value;
-            for (let i = 0; i < 4; i++) {
+            
+            // Update: perulangan batas diubah ke 6 kali
+            for (let i = 0; i < 6; i++) {
                 codeItems[i].textContent = val[i] ? val[i] : '-';
                 if(val[i]) {
                     codeItems[i].style.borderColor = '#00903B';
@@ -437,7 +450,8 @@
         // 5. Submit OTP
         submitOtpBtn.addEventListener('click', () => {
             let otpCode = otpInput.value;
-            if (otpCode.length < 4) return;
+            // Update: validasi menjadi wajib 6 karakter
+            if (otpCode.length < 6) return;
 
             const teksAsli = submitOtpBtn.innerHTML;
             submitOtpBtn.innerHTML = 'Memverifikasi...';
